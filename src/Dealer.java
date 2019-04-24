@@ -1,10 +1,18 @@
 public class Dealer
 {
     Deck deck;
-//TODO shuffling
+
     public void shuffleDeck()
     {
-        deck = new Deck();
+        this.deck = new Deck();
+
+        for (int i = 0; i < 100; i++)
+        {
+            Deck firstHalf = new Deck(deck.getCards().subList(0, (deck.getCards().size() - 1) / 2));
+            Deck secondHalf = new Deck(deck.getCards().subList((deck.getCards().size() - 1) / 2, deck.getCards().size()));
+            deck.getCards().clear();
+            deck.putCardsInRandomOrder(firstHalf, secondHalf);
+        }
     }
 
     private Card topCard()
