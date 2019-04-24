@@ -1,13 +1,22 @@
 public abstract class Player implements Comparable <Player>
 {
-    private boolean hasPassed;
-    private int score;
-    private int gameScore;
+    protected boolean hasPassed;
+    protected int score;
+    protected int gameScore;
+    protected Hand hand;
 
     @Override
     public int compareTo(Player o)
     {
         return this.score - o.getScore();
+    }
+
+    protected void tooManyPoints()
+    {
+        if (score > 21)
+        {
+            pass();
+        }
     }
 
     public int getScore()
@@ -27,11 +36,22 @@ public abstract class Player implements Comparable <Player>
         return returnedValue;
     }
 
-    public abstract void playTurn();
+    protected void updateScore()
+    {
+        score = 0;
+        for (Card card : hand.getCards())
+        {
+            score += card.getValue();
+        }
+    }
+
+    public abstract void playTurn(Dealer dealer);
 
     public void startOfTurn()
     {
-        hasPassed = false;
+        this.score = 0;
+        this.hasPassed = false;
+        hand.clearHand();
     }
 
     public void endOfTurn()
@@ -53,6 +73,11 @@ public abstract class Player implements Comparable <Player>
     public void givePoint()
     {
         gameScore++;
+    }
+
+    protected void pass()
+    {
+        hasPassed = true;
     }
 
     public int getGameScore()

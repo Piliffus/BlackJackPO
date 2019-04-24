@@ -3,6 +3,16 @@ public class Card
     private String name;
     private int value;
 
+    public static int maxValue()
+    {
+        return 11;
+    }
+
+    public int getValue()
+    {
+        return value;
+    }
+
     public static String[] getNames()
     {
         return new String[] {"2", "3", "4", "5", "6", "7", "8", "9", "10", "W", "D", "K", "as"};

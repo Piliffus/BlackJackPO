@@ -73,12 +73,13 @@ public class Game implements Comparator<Player>
 
     private void dealCards()
     {
+        dealer.shuffleDeck();
         for (Player player : players)
         {
             player.startOfTurn();
             while (!player.hasPassed())
             {
-                player.playTurn();
+                player.playTurn(dealer);
             }
             player.endOfTurn();
         }
@@ -108,7 +109,7 @@ public class Game implements Comparator<Player>
                     players.add(i, new SleeperPlayer());
                     break;
                 case "Limit":
-                    players.add(i, new LimitPlayer());
+                    players.add(i, new LimitPlayer(14));
                     break;
                 case "Careful":
                     players.add(i, new CarefulPlayer());
