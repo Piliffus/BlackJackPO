@@ -64,7 +64,7 @@ public class Game implements Comparator<Player>
 
         for (int i = players.size()-1; i >= 0; i--)
         {
-            if (players.get(i).getScore() < 21)
+            if (players.get(i).getScore() <= 21)
             {
                 maxPoints = players.get(i).getScore();
                 break;
@@ -116,7 +116,7 @@ public class Game implements Comparator<Player>
 
         for (int i = 1; i < howManyPlayers; i++) // '<=' would be howManyPlayers if we do not count the croupier
         {
-            switch (playerTypes[generator.nextInt(playerTypes.length-1)])
+            switch (playerTypes[generator.nextInt(playerTypes.length)])
             {
                 case "Random":
                     howManyRandoms++;

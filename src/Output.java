@@ -27,7 +27,9 @@ public class Output
 
     public static void printWinners(ArrayList<Player> winners)
     {
-        System.out.println("Winners are :");
+        System.out.println();
+        System.out.println("Game is over");
+        System.out.println("Winners are:");
         for (Player player : winners)
         {
             System.out.print(player.getName() + " ");
