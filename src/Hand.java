@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class Hand
 {
-    ArrayList<Card> cards;
+    private ArrayList<Card> cards;
 
     public ArrayList<Card> getCards()
     {
@@ -17,5 +17,10 @@ public class Hand
     public void giveCard(Card card)
     {
         cards.add(card);
+    }
+
+    public Hand()
+    {
+        this.cards = new ArrayList<>(0);
     }
 }

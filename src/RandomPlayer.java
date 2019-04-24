@@ -17,4 +17,9 @@ public class RandomPlayer extends Player
             pass();
         }
     }
+
+    public RandomPlayer(String name)
+    {
+        super(name);
+    }
 }

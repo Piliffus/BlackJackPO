@@ -6,4 +6,9 @@ public class SleeperPlayer extends Player
         // Sleeper instantly passes
         pass();
     }
+
+    public SleeperPlayer(String name)
+    {
+        super(name);
+    }
 }

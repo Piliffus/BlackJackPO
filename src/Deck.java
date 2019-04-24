@@ -8,4 +8,18 @@ public class Deck
     {
         return cards;
     }
+
+    public Deck()
+    {
+        String[] names = Card.getNames();
+        cards = new ArrayList<>(names.length * 4);
+
+        for (String name : names)
+        {
+            for (int y = 0; y < 4; y++)
+            {
+                cards.add(new Card(name));
+            }
+        }
+    }
 }

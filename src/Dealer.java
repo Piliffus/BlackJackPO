@@ -1,7 +1,7 @@
 public class Dealer
 {
     Deck deck;
-
+//TODO shuffling
     public void shuffleDeck()
     {
         deck = new Deck();

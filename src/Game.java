@@ -5,13 +5,17 @@ import java.util.Random;
 
 public class Game implements Comparator<Player>
 {
-    ArrayList<Player> players;
-    Dealer dealer;
-    boolean gameOver;
+    private ArrayList<Player> players;
+    private Dealer dealer;
+    private boolean gameOver;
+    private int roundNumber;
+    private int howManyRounds;
 
-    public void start(int howManyPlayers)
+    public void start(int howManyPlayers, int howManyRounds)
     {
-        gameOver = false;
+        this.roundNumber = 0;
+        this.howManyRounds = howManyRounds;
+        this.gameOver = false;
         preparePlayers(howManyPlayers);
         prepareDealer();
         playRound();
@@ -21,8 +25,11 @@ public class Game implements Comparator<Player>
     {
         while (!gameOver)
         {
+            roundNumber++;
+            Output.printRoundNumber(roundNumber);
             dealCards();
             givePoints();
+            if (roundNumber >= howManyRounds) gameOver = true;
         }
 
         whoWon();
@@ -45,6 +52,8 @@ public class Game implements Comparator<Player>
                 break;
             }
         }
+
+        Output.printWinners(winners);
     }
 
     private void givePoints()
@@ -67,8 +76,11 @@ public class Game implements Comparator<Player>
             if (player.askForScore() == maxPoints)
             {
                 player.givePoint();
+                Output.printRoundWinner(player);
             }
         }
+
+        Output.printGameScore(players);
     }
 
     private void dealCards()
@@ -96,23 +108,31 @@ public class Game implements Comparator<Player>
         String[] playerTypes = Player.getPlayerTypes();
 
         players = new ArrayList<>(howManyPlayers);
-        players.add(0, new CroupierPlayer());
+        players.add(0, new CroupierPlayer("Croupier"));
+        int howManyRandoms = 0;
+        int howManySleepers = 0;
+        int howManyLimiters = 0;
+        int howManyCareful = 0;
 
         for (int i = 1; i < howManyPlayers; i++) // '<=' would be howManyPlayers if we do not count the croupier
         {
             switch (playerTypes[generator.nextInt(playerTypes.length-1)])
             {
                 case "Random":
-                    players.add(i, new RandomPlayer());
+                    howManyRandoms++;
+                    players.add(i, new RandomPlayer("Random #" + howManyRandoms));
                     break;
                 case "Sleeper":
-                    players.add(i, new SleeperPlayer());
+                    howManySleepers++;
+                    players.add(i, new SleeperPlayer("Sleeper #" + howManySleepers));
                     break;
                 case "Limit":
-                    players.add(i, new LimitPlayer(14));
+                    howManyLimiters++;
+                    players.add(i, new LimitPlayer("Limit #" + howManyLimiters, 14));
                     break;
                 case "Careful":
-                    players.add(i, new CarefulPlayer());
+                    howManyCareful++;
+                    players.add(i, new CarefulPlayer("Careful #" + howManyCareful));
                     break;
             }
         }

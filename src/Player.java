@@ -1,9 +1,12 @@
-public abstract class Player implements Comparable <Player>
+public abstract class Player implements Comparable<Player>
 {
     protected boolean hasPassed;
     protected int score;
     protected int gameScore;
     protected Hand hand;
+    protected String name;
+
+    public abstract void playTurn(Dealer dealer);
 
     @Override
     public int compareTo(Player o)
@@ -11,41 +14,10 @@ public abstract class Player implements Comparable <Player>
         return this.score - o.getScore();
     }
 
-    protected void tooManyPoints()
-    {
-        if (score > 21)
-        {
-            pass();
-        }
-    }
-
-    public int getScore()
-    {
-        return score;
-    }
-
     public static String[] getPlayerTypes()
     {
-        return new String[] {"Random", "Sleeper", "Limit", "Careful"};
+        return new String[]{"Random", "Sleeper", "Limit", "Careful"};
     }
-
-    public int askForScore()
-    {
-        int returnedValue = score;
-        this.score = 0;
-        return returnedValue;
-    }
-
-    protected void updateScore()
-    {
-        score = 0;
-        for (Card card : hand.getCards())
-        {
-            score += card.getValue();
-        }
-    }
-
-    public abstract void playTurn(Dealer dealer);
 
     public void startOfTurn()
     {
@@ -57,22 +29,33 @@ public abstract class Player implements Comparable <Player>
     public void endOfTurn()
     {
         hasPassed = true;
+        Output.printPlayerType(this);
+        Output.printHand(hand);
+        Output.printScore(score);
     }
 
-    public boolean hasPassed()
+    protected void updateScore()
     {
-        return hasPassed;
+        score = 0;
+        for (Card card : hand.getCards())
+        {
+            score += card.getValue();
+        }
     }
 
-    public Player()
+    public int askForScore()
     {
+        int returnedValue = score;
         this.score = 0;
-        this.gameScore = 0;
+        return returnedValue;
     }
 
-    public void givePoint()
+    protected void tooManyPoints()
     {
-        gameScore++;
+        if (score > 21)
+        {
+            pass();
+        }
     }
 
     protected void pass()
@@ -80,8 +63,36 @@ public abstract class Player implements Comparable <Player>
         hasPassed = true;
     }
 
+    public void givePoint()
+    {
+        gameScore++;
+    }
+
+    public boolean hasPassed()
+    {
+        return hasPassed;
+    }
+
     public int getGameScore()
     {
         return gameScore;
+    }
+
+    public int getScore()
+    {
+        return score;
+    }
+
+    public String getName()
+    {
+        return name;
+    }
+
+    public Player(String name)
+    {
+        this.score = 0;
+        this.name = name;
+        this.gameScore = 0;
+        this.hand = new Hand();
     }
 }

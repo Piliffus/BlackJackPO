@@ -1,7 +1,8 @@
 public class CarefulPlayer extends LimitPlayer
 {
-    public CarefulPlayer()
+    public CarefulPlayer(String name)
     {
-        this.limit = 21 - Card.maxValue() + 1;
+        super(name);
+        this.limit = 21 - Card.maxValue() + 1; // we need +1 because limit is exclusive, not inclusive
     }
 }

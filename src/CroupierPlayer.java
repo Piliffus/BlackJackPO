@@ -1,7 +1,8 @@
 public class CroupierPlayer extends LimitPlayer
 {
-    public CroupierPlayer()
+    public CroupierPlayer(String name)
     {
-        limit = 17;
+        super(name);
+        this.limit = 17;
     }
 }

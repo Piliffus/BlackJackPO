@@ -15,16 +15,21 @@ public class Card
 
     public static String[] getNames()
     {
-        return new String[] {"2", "3", "4", "5", "6", "7", "8", "9", "10", "W", "D", "K", "as"};
+        return new String[] {"2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "ace"};
+    }
+
+    public String getName()
+    {
+        return name;
     }
 
     private void assignValue()
     {
-        if (name.equals("W") || name.equals("D") || name.equals("K"))
+        if (name.equals("J") || name.equals("Q") || name.equals("K"))
         {
             this.value = 10;
         }
-        else if (name.equals("as"))
+        else if (name.equals("ace"))
         {
             this.value = 11;
         }
