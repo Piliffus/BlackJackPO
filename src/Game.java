@@ -128,8 +128,8 @@ public class Game implements Comparator<Player>
                     break;
                 case "Limit":
                     howManyLimiters++;
-                    players.add(i, new LimitPlayer("Limit #" + howManyLimiters, 14));
-                    break;
+                    players.add(i, new LimitPlayer("Limit #" + howManyLimiters, generator.nextInt(14)+8));
+                    break; // limit in LimitPlayer is exclusive
                 case "Careful":
                     howManyCareful++;
                     players.add(i, new CarefulPlayer("Careful #" + howManyCareful));

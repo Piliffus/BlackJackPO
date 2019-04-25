@@ -15,7 +15,7 @@ public class Card
 
     public static String[] getNames()
     {
-        return new String[] {"2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "ace"};
+        return new String[] {"2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King", "ace"};
     }
 
     public String getName()
@@ -25,7 +25,7 @@ public class Card
 
     private void assignValue()
     {
-        if (name.equals("J") || name.equals("Q") || name.equals("K"))
+        if (name.equals("Jack") || name.equals("Queen") || name.equals("King"))
         {
             this.value = 10;
         }
